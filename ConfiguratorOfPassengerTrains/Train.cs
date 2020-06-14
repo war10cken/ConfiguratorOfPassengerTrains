@@ -1,7 +1,12 @@
 ﻿namespace ConfiguratorOfPassengerTrains
 {
-    public class Train
+    public class Train 
     {
-        
+
+
+        public Train()
+        {
+            
+        }
     }
 }

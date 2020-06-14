@@ -39,6 +39,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Direction.cs" />
+        <Compile Include="MenuForManagementTrain.cs" />
+        <Compile Include="Ticket.cs" />
         <Compile Include="Train.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
