@@ -14,7 +14,12 @@
             1) Пассажирские вагоны
             2) Номер поезда
          */
-        
-        public static void Main(string[] args) { }
+
+        public static void Main(string[] args)
+        {
+            var direction = new Direction();
+            direction.EnterDirection();
+            direction.WriteDirection();
+        }
     }
 }

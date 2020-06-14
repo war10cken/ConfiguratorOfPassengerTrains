@@ -8,22 +8,18 @@ namespace ConfiguratorOfPassengerTrains
         private float _travelTime { get; set; }
         private int _numberOfTrain { get; set; }
 
-        public Direction(string nameOfDirection, float travelTime, int numberOfTrain)
+        public Direction()
         {
-            if (!string.IsNullOrWhiteSpace(nameOfDirection))
-                _nameOfDirection = nameOfDirection;
-            else
-                Console.WriteLine("Вы не ввели имя пути!");
-
-            if (travelTime > 0)
-                _travelTime = travelTime;
-            else
-                Console.WriteLine("Время не может быть отрицательным!");
-            
-            _numberOfTrain = numberOfTrain;
+            var random = new Random();
+            _numberOfTrain = random.Next(0, 99999);
+            _nameOfDirection = null;
+            _travelTime = 0;
         }
 
-        public void WriteDirection() => Console.WriteLine($"{_nameOfDirection} \n{_travelTime}");
+        public void WriteDirection() =>
+            Console.WriteLine($"Название пути: {_nameOfDirection} " +
+                              $"\nВремя в пути: {_travelTime:0.00} часов " +
+                              $"\nНомер поезда: №{_numberOfTrain}");
 
         public void EnterDirection()
         {
@@ -34,6 +30,12 @@ namespace ConfiguratorOfPassengerTrains
                 var startStation = Console.ReadLine();
                 Console.Write("Введите имя конечной станции: ");
                 var endStation = Console.ReadLine();
+                if (startStation == endStation || string.IsNullOrWhiteSpace(startStation) ||
+                    string.IsNullOrWhiteSpace(endStation)) 
+                {
+                    Console.WriteLine("Названия путей не могу совпадать или быть пустыми!");
+                    continue;
+                }
                 _nameOfDirection = $"{startStation} - {endStation}";
 
                 Console.Write("Введите время в пути(в минутах): ");
@@ -47,6 +49,7 @@ namespace ConfiguratorOfPassengerTrains
                     Console.WriteLine("Вы ввели не число!");
                 }
             }
+            Console.Clear();
         }
     }
 }
