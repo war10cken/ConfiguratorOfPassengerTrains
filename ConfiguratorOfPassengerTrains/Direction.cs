@@ -4,7 +4,8 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class Direction
     {
-        private            float  _travelTime       { get; set; }
+        private            float  _travelTimeHours       { get; set; }
+        private float _travelTimeMinutes { get; set; }
         private            string NameOfDirection   { get; set; }
         protected          int    NumberOfTrain     { get; set; }
         //FIXME: Исправить internal
@@ -14,14 +15,14 @@ namespace ConfiguratorOfPassengerTrains
         public Direction()
         {
             NameOfDirection   = null;
-            _travelTime       = 0;
+            _travelTimeHours       = 0;
             CountOfPassengers = 0;
         }
 
         public void WriteDirection()
         {
             Console.Write($"Название пути: {NameOfDirection} " +
-                          $"\nВремя в пути: {_travelTime:0} часов " +
+                          $"\nВремя в пути: {_travelTimeHours:0} часа(-ов) {_travelTimeMinutes:00} минуты" +
                           $"\nНомер поезда: №{NumberOfTrain} " +
                           $"\nКол-во пассажиров: {CountOfPassengers}");
             Console.WriteLine();
@@ -51,7 +52,14 @@ namespace ConfiguratorOfPassengerTrains
                 Console.Write("Введите время в пути(в минутах): ");
                 if (float.TryParse(Console.ReadLine(), out var result))
                 {
-                    _travelTime        = result / 60;
+                    var hour = 0;
+                    while (result > 60)
+                    {
+                        result -= 60;
+                        _travelTimeHours = ++hour;
+                    }
+
+                    _travelTimeMinutes = result;
                     isEnterInformation = false;
                 }
                 else
