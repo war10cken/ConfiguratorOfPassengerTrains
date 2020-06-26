@@ -43,7 +43,7 @@ namespace ConfiguratorOfPassengerTrains
                             direction.EnterDirection();
                             break;
                         case 2:
-                            direction.CountOfPassengers = buyTicket.TicketSelling();
+                            buyTicket.TicketSelling();
                             break;
                         case 3:
                             //Create a train

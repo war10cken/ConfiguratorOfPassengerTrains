@@ -4,18 +4,19 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class Direction
     {
-        private            float  _travelTimeHours       { get; set; }
-        private float _travelTimeMinutes { get; set; }
-        private            string NameOfDirection   { get; set; }
-        protected          int    NumberOfTrain     { get; set; }
-        //FIXME: Исправить internal
-        protected internal int    CountOfPassengers { get; set; }
+        private float  _travelTimeHours   { get; set; }
+        private float  _travelTimeMinutes { get; set; }
+        private string NameOfDirection    { get; set; }
+
+        protected int NumberOfTrain { get; set; }
+        
+        public int CountOfPassengers { get; private set; }
 
 
         public Direction()
         {
             NameOfDirection   = null;
-            _travelTimeHours       = 0;
+            _travelTimeHours  = 0;
             CountOfPassengers = 0;
         }
 
@@ -52,11 +53,11 @@ namespace ConfiguratorOfPassengerTrains
                 Console.Write("Введите время в пути(в минутах): ");
                 if (float.TryParse(Console.ReadLine(), out var result))
                 {
-                    var hour = 0;
+                    int hour = 0;
                     while (result > 60)
                     {
-                        result -= 60;
-                        _travelTimeHours = ++hour;
+                        result           -= 60;
+                        _travelTimeHours =  ++hour;
                     }
 
                     _travelTimeMinutes = result;
@@ -69,6 +70,11 @@ namespace ConfiguratorOfPassengerTrains
             }
 
             Console.Clear();
+        }
+
+        public void SetCountOfPassenger(Random random)
+        {
+            CountOfPassengers = random.Next(0, 361);
         }
     }
 }
