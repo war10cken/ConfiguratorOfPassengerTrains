@@ -8,14 +8,14 @@ namespace ConfiguratorOfPassengerTrains
         private float _travelTimeMinutes { get; set; }
         private string _nameOfDirection { get; set; }
         private int _numberOfTrain { get; }
-        private int _countOfPassengers { get; set; }
+        public int CountOfPassengers { get; private set; }
 
         public Direction()
         {
             var random = new Random();
             _nameOfDirection = null;
             _travelTimeHours = 0;
-            _countOfPassengers = 0;
+            CountOfPassengers = 0;
             _numberOfTrain = random.Next(0, 99999);
         }
 
@@ -24,7 +24,7 @@ namespace ConfiguratorOfPassengerTrains
             Console.Write($"Название пути: {_nameOfDirection} " +
                           $"\nВремя в пути: {_travelTimeHours:0} часа(-ов) {_travelTimeMinutes:00} минуты" +
                           $"\nНомер поезда: №{_numberOfTrain} " +
-                          $"\nКол-во пассажиров: {_countOfPassengers}");
+                          $"\nКол-во пассажиров: {CountOfPassengers}");
             Console.WriteLine();
         }
 
@@ -73,7 +73,7 @@ namespace ConfiguratorOfPassengerTrains
         
         public void SetCountOfPassenger(Random random)
         {
-            _countOfPassengers = random.Next(0, 361);
+            CountOfPassengers = random.Next(0, 361);
         }
 
         public bool CheckIsDirectionEmpty()

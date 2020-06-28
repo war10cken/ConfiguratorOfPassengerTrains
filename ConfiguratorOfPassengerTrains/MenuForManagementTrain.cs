@@ -9,7 +9,6 @@ namespace ConfiguratorOfPassengerTrains
         public void ShowMenu()
         {
             var direction = new Direction();
-            var buyTicket = new Ticket();
             
             bool isWorks = true;
             
@@ -33,10 +32,12 @@ namespace ConfiguratorOfPassengerTrains
                             direction.EnterDirection();
                             break;
                         case 2:
+                            var buyTicket = new Ticket();
                             buyTicket.TicketSelling(direction);
                             break;
                         case 3:
-                            //Create a train
+                            var createTrain = new Train();
+                            createTrain.CreateTrain(direction);
                             break;
                         case 4:
                             //Send a train
