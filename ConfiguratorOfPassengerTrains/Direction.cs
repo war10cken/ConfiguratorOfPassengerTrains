@@ -6,61 +6,59 @@ namespace ConfiguratorOfPassengerTrains
     {
         private float _travelTimeHours { get; set; }
         private float _travelTimeMinutes { get; set; }
-        private string NameOfDirection { get; set; }
-
-        protected int NumberOfTrain { get; set; }
-        
-        public int CountOfPassengers { get; private set; }
-
+        private string _nameOfDirection { get; set; }
+        private int _numberOfTrain { get; }
+        private int _countOfPassengers { get; set; }
 
         public Direction()
         {
-            NameOfDirection = null;
+            var random = new Random();
+            _nameOfDirection = null;
             _travelTimeHours = 0;
-            CountOfPassengers = 0;
+            _countOfPassengers = 0;
+            _numberOfTrain = random.Next(0, 99999);
         }
 
         public void WriteDirection()
         {
-            Console.Write($"Название пути: {NameOfDirection} " +
+            Console.Write($"Название пути: {_nameOfDirection} " +
                           $"\nВремя в пути: {_travelTimeHours:0} часа(-ов) {_travelTimeMinutes:00} минуты" +
-                          $"\nНомер поезда: №{NumberOfTrain} " +
-                          $"\nКол-во пассажиров: {CountOfPassengers}");
+                          $"\nНомер поезда: №{_numberOfTrain} " +
+                          $"\nКол-во пассажиров: {_countOfPassengers}");
             Console.WriteLine();
         }
 
         public void EnterDirection()
         {
-            var random = new Random();
-            NumberOfTrain = random.Next(0, 99999);
-
             bool isEnterInformation = true;
+            
             while (isEnterInformation)
             {
+                Console.Clear();
+                
                 Console.Write("Введите имя отправной станции: ");
-                var startStation = Console.ReadLine();
+                string startStation = Console.ReadLine();
                 Console.Write("Введите имя конечной станции: ");
-                var endStation = Console.ReadLine();
-                if (startStation == endStation || string.IsNullOrWhiteSpace(startStation) ||
-                    string.IsNullOrWhiteSpace(endStation))
+                string endStation = Console.ReadLine();
+                
+                if (startStation == endStation)
                 {
-                    Console.WriteLine("Названия путей не могу совпадать или быть пустыми!");
+                    Console.WriteLine("Названия путей не могу совпадать.");
                     continue;
                 }
-
-                NameOfDirection = $"{startStation} - {endStation}";
+                
+                if (string.IsNullOrWhiteSpace(startStation) || string.IsNullOrWhiteSpace(endStation))
+                {
+                    Console.WriteLine("Названия путей не могу быть пустыми.");
+                    continue;
+                }
+                
+                _nameOfDirection = $"{startStation} - {endStation}";
 
                 Console.Write("Введите время в пути(в минутах): ");
-                if (float.TryParse(Console.ReadLine(), out var result))
+                if (int.TryParse(Console.ReadLine(), out int result))
                 {
-                    int hour = 0;
-                    while (result > 60)
-                    {
-                        result -= 60;
-                        _travelTimeHours = ++hour;
-                    }
-
-                    _travelTimeMinutes = result;
+                    SetTravelTime(result);
                     isEnterInformation = false;
                 }
                 else
@@ -72,9 +70,28 @@ namespace ConfiguratorOfPassengerTrains
             Console.Clear();
         }
 
+        
         public void SetCountOfPassenger(Random random)
         {
-            CountOfPassengers = random.Next(0, 361);
+            _countOfPassengers = random.Next(0, 361);
         }
+
+        public bool CheckIsDirectionEmpty()
+        {
+            return string.IsNullOrEmpty(_nameOfDirection);
+        }
+
+        private void SetTravelTime(int result)
+        {
+            int hour = 0;
+            while (result > 60)
+            {
+                result -= 60;
+                _travelTimeHours = ++hour;
+            }
+
+            _travelTimeMinutes = result;
+        }
+        
     }
 }

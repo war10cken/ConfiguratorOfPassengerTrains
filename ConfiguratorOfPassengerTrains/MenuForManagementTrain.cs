@@ -4,19 +4,22 @@ using System.Threading;
 
 namespace ConfiguratorOfPassengerTrains
 {
-    public class MenuForManagementTrain : Direction
+    public class MenuForManagementTrain
     {
         public void ShowMenu()
         {
             var direction = new Direction();
             var buyTicket = new Ticket();
-
-
+            
             bool isWorks = true;
+            
             while (isWorks)
             {
-                direction.WriteDirection();
-                
+                if(!direction.CheckIsDirectionEmpty())
+                    direction.WriteDirection();
+                else
+                    Console.WriteLine("Путь ещё не создан.");
+
                 Console.WriteLine();
                 
                 WriteMenuItems();
