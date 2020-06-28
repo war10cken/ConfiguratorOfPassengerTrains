@@ -5,7 +5,7 @@
         public static void Main(string[] args)
         {
             var menu = new MenuForManagementTrain();
-            menu.WriteMenu();
+            menu.ShowMenu();
         }
     }
 }

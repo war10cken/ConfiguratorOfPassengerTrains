@@ -6,36 +6,23 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class MenuForManagementTrain : Direction
     {
-        public void WriteMenu()
+        public void ShowMenu()
         {
-            var menuItemNames = new List<string>
-            {
-                "Создать направление",
-                "Продать билеты",
-                "Сформировать поезд",
-                "Отправить поезд",
-                "Выход"
-            };
             var direction = new Direction();
             var buyTicket = new Ticket();
 
 
-            var isWorks = true;
+            bool isWorks = true;
             while (isWorks)
             {
-                var numberOfItem = 1;
-                
                 direction.WriteDirection();
+                
                 Console.WriteLine();
-                Console.WriteLine("Выберите пунк меню: ");
-                foreach (var menuItemName in menuItemNames)
-                {
-                    Console.WriteLine($"{numberOfItem} - {menuItemName}");
-                    numberOfItem++;
-                }
+                
+                WriteMenuItems();
 
                 Console.Write("Ваш выбор: ");
-                if (int.TryParse(Console.ReadLine(), out var result))
+                if (int.TryParse(Console.ReadLine(), out int result))
                 {
                     switch (result)
                     {
@@ -43,7 +30,7 @@ namespace ConfiguratorOfPassengerTrains
                             direction.EnterDirection();
                             break;
                         case 2:
-                            buyTicket.TicketSelling();
+                            buyTicket.TicketSelling(direction);
                             break;
                         case 3:
                             //Create a train
@@ -65,6 +52,26 @@ namespace ConfiguratorOfPassengerTrains
                     Console.WriteLine("Вы ввели не цифру или не существующий пункт меню");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+            }
+        }
+
+        private void WriteMenuItems()
+        {
+            int numberOfItem = 1;
+            var menuItemNames = new List<string>
+            {
+                "Создать направление",
+                "Продать билеты",
+                "Сформировать поезд",
+                "Отправить поезд",
+                "Выход"
+            };
+            
+            Console.WriteLine("Выберите пунк меню: ");
+            foreach (var menuItemName in menuItemNames)
+            {
+                Console.WriteLine($"{numberOfItem} - {menuItemName}");
+                numberOfItem++;
             }
         }
     }

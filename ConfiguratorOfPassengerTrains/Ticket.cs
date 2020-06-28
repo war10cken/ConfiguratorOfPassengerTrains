@@ -4,9 +4,8 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class Ticket
     {
-        public void TicketSelling()
+        public void TicketSelling(Direction direction)
         {
-            Direction direction = new Direction();
             var random = new Random();
             direction.SetCountOfPassenger(random);
         }

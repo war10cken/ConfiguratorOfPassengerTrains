@@ -4,9 +4,9 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class Direction
     {
-        private float  _travelTimeHours   { get; set; }
-        private float  _travelTimeMinutes { get; set; }
-        private string NameOfDirection    { get; set; }
+        private float _travelTimeHours { get; set; }
+        private float _travelTimeMinutes { get; set; }
+        private string NameOfDirection { get; set; }
 
         protected int NumberOfTrain { get; set; }
         
@@ -15,8 +15,8 @@ namespace ConfiguratorOfPassengerTrains
 
         public Direction()
         {
-            NameOfDirection   = null;
-            _travelTimeHours  = 0;
+            NameOfDirection = null;
+            _travelTimeHours = 0;
             CountOfPassengers = 0;
         }
 
@@ -34,7 +34,7 @@ namespace ConfiguratorOfPassengerTrains
             var random = new Random();
             NumberOfTrain = random.Next(0, 99999);
 
-            var isEnterInformation = true;
+            bool isEnterInformation = true;
             while (isEnterInformation)
             {
                 Console.Write("Введите имя отправной станции: ");
@@ -56,8 +56,8 @@ namespace ConfiguratorOfPassengerTrains
                     int hour = 0;
                     while (result > 60)
                     {
-                        result           -= 60;
-                        _travelTimeHours =  ++hour;
+                        result -= 60;
+                        _travelTimeHours = ++hour;
                     }
 
                     _travelTimeMinutes = result;
