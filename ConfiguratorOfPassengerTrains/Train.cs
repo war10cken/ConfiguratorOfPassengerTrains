@@ -5,19 +5,38 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class Train 
     {
-        private List<Wagon> _train = new List<Wagon>();
+        private readonly List<Wagon> _train = new List<Wagon>();
         
-        public void CreateTrain(Direction direction)
+        
+        public void CreateTrain()
         {
             var random = new Random();
-            int countOfPassengerInWagon = random.Next(1, direction.CountOfPassengers);
-            
-            //TODO: доделать создание поезда
-            
-            for (int i = 0; i < direction.CountOfPassengers; i++)
+            var station = new Station();
+            var direction = station.GetDirection();
+            bool isCreatedWagons = true;
+
+            while (isCreatedWagons)
             {
-                _train.Add(new Wagon(countOfPassengerInWagon));
+                if (direction.CountOfPassengers != 0)
+                {
+                    int countPassengerInWagon = random.Next(1, direction.CountOfPassengers + 1);
+                    var wagon = new Wagon(countPassengerInWagon);
+                    _train.Add(wagon);
+                    direction.SetCountOfPassenger(wagon);
+                }
+                else
+                {
+                    Console.WriteLine("Пассажиры сели на свои места.");
+                    isCreatedWagons = false;
+                }
             }
         }
+
+        public void SendOnTheTrainOnTheWay()
+        {
+            
+        }
+
+       
     }
 }

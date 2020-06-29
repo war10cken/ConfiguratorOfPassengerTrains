@@ -4,7 +4,7 @@
     {
         public static void Main(string[] args)
         {
-            var menu = new MenuForManagementTrain();
+            var menu = new Station();
             menu.ShowMenu();
         }
     }

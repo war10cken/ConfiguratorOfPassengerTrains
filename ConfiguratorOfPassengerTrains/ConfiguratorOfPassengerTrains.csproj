@@ -39,7 +39,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Direction.cs" />
-        <Compile Include="MenuForManagementTrain.cs" />
+        <Compile Include="Station.cs" />
         <Compile Include="Ticket.cs" />
         <Compile Include="Train.cs" />
         <Compile Include="Program.cs" />

@@ -1,13 +1,12 @@
-﻿
-namespace ConfiguratorOfPassengerTrains
+﻿namespace ConfiguratorOfPassengerTrains
 {
-    public class Wagon : Train
+    public class Wagon
     {
-        private int _wagonCapacity { get; }
+        public int WagonCapacity { get; }
 
         public Wagon(int wagonCapacity)
         {
-            _wagonCapacity = wagonCapacity;
+            WagonCapacity = wagonCapacity;
         }
     }
 }
