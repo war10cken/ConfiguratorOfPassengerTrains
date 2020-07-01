@@ -5,8 +5,6 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class Ticket : Station
     {
-        public bool IsSold { get; private set; }
-
         public Ticket(List<Direction> directions)
         {
             _directions = directions;
@@ -14,11 +12,8 @@ namespace ConfiguratorOfPassengerTrains
         public void TicketSelling()
         {
             var random = new Random();
-            var direction = _directions[0];
-            
-           
-            direction.SetCountOfPassenger(random);
-            IsSold = true;
+
+            _directions[0].SetCountOfPassenger(random);
             
             Console.WriteLine("Билеты успешно проданы.");
         }

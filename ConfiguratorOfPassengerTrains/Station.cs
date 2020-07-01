@@ -12,7 +12,8 @@ namespace ConfiguratorOfPassengerTrains
         {
             bool isWorks = true;
             bool isCreatedTrain = false;
-            
+            var train = new Train(_directions);
+
             while (isWorks)
             {
                 if(isCreatedTrain)
@@ -39,14 +40,17 @@ namespace ConfiguratorOfPassengerTrains
                             buyTicket.TicketSelling();
                             break;
                         case 3:
-                            var createTrain = new Train(_directions);
-                            isCreatedTrain = createTrain.CreateTrain();
+                            isCreatedTrain = train.CreateTrain();
                             break;
                         case 4:
-                            //Send a train
+                            train.SendOnTheTrainOnTheWay();
+                            isCreatedTrain = false;
                             break;
                         case 5:
                             isWorks = false;
+                            break;
+                        default:
+                            Console.WriteLine("Вы ввели несуществующий пункт меню или не число.");
                             break;
                     }
 
@@ -151,6 +155,7 @@ namespace ConfiguratorOfPassengerTrains
                 result -= 60;
                 hour++;
             }
+            
             travelTime = travelTime.AddHours(hour);
             travelTime = travelTime.AddMinutes(result);
             return travelTime;
@@ -161,7 +166,7 @@ namespace ConfiguratorOfPassengerTrains
             foreach (var direction in _directions)
             {
                 Console.Write($"Название пути: {direction.NameOfDirection} " +
-                              $"\nВремя в пути: {direction.TravelTime.Month} месяцев {direction.TravelTime.Day} дней " +
+                              $"\nВремя в пути: {direction.TravelTime.Month - 1} месяцев {direction.TravelTime.Day - 1} дней " +
                               $"{direction.TravelTime.Hour:0} часа(-ов) {direction.TravelTime.Minute:00} минуты" +
                               $"\nНомер поезда: №{direction.NumberOfTrain} " +
                               $"\nКол-во пассажиров: {direction.CountOfPassengers}");

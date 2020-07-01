@@ -17,16 +17,6 @@ namespace ConfiguratorOfPassengerTrains
             NumberOfTrain = numberOfTrain;
         }
 
-        
-
-        public void WriteDirectionWhenTicketsSold(Ticket ticket)
-        {
-            if (ticket.IsSold)
-            {
-                
-            }
-        }
-        
         public void SetCountOfPassenger(Random random)
         { 
             CountOfPassengers = random.Next(0, 361);

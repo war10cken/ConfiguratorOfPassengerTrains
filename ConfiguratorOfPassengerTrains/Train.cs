@@ -33,7 +33,8 @@ namespace ConfiguratorOfPassengerTrains
 
         public void SendOnTheTrainOnTheWay()
         {
-            
+            _train.Clear();
+            Console.WriteLine("Поезд отправлен. \nВы можете создать новый путь.");
         }
     }
 }
