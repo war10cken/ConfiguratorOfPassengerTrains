@@ -1,32 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConfiguratorOfPassengerTrains
 {
-    public class Ticket
+    public class Ticket : Station
     {
         public bool IsSold { get; private set; }
+
+        public Ticket(List<Direction> directions)
+        {
+            _directions = directions;
+        }
         public void TicketSelling()
         {
             var random = new Random();
-            var station = new Station();
-            try
-            {
-                var s = station.Directions[0];
-                var direction = station.GetDirection();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Data);
-                Console.WriteLine(e.Source);
-                Console.WriteLine(e.StackTrace);
-            }
+            var direction = _directions[0];
+            
            
-            // direction.SetCountOfPassenger(random);
+            direction.SetCountOfPassenger(random);
             IsSold = true;
             
             Console.WriteLine("Билеты успешно проданы.");
         }
 
-        
     }
 }

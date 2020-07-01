@@ -6,15 +6,18 @@ namespace ConfiguratorOfPassengerTrains
 {
     public class Station
     {
-        public List<Direction> Directions { get; } = new List<Direction>();
+        protected List<Direction> _directions = new List<Direction>();
 
         public void ShowMenu()
         {
             bool isWorks = true;
+            bool isCreatedTrain = false;
             
             while (isWorks)
             {
-                if(!CheckIsDirectionEmpty())
+                if(isCreatedTrain)
+                    Console.WriteLine("Поезд сформирован.");
+                else if(!CheckIsDirectionEmpty())
                    WriteDirection();
                 else
                     Console.WriteLine("Путь ещё не создан.");
@@ -32,12 +35,12 @@ namespace ConfiguratorOfPassengerTrains
                             EnterDirection();
                             break;
                         case 2:
-                            var buyTicket = new Ticket();
+                            var buyTicket = new Ticket(_directions);
                             buyTicket.TicketSelling();
                             break;
                         case 3:
-                            var createTrain = new Train();
-                            createTrain.CreateTrain();
+                            var createTrain = new Train(_directions);
+                            isCreatedTrain = createTrain.CreateTrain();
                             break;
                         case 4:
                             //Send a train
@@ -84,11 +87,19 @@ namespace ConfiguratorOfPassengerTrains
             string nameOfDirection;
             var travelTime = new DateTime();
             bool isEnterInformation = true;
-            
+
             while (isEnterInformation)
             {
                 Console.Clear();
-                
+
+                if (!CheckIsDirectionEmpty())
+                {
+                    Console.WriteLine("В данный момент создаётся направление. Создание нового направление невозможно");
+                    Thread.Sleep(2300);
+                    break;
+                }
+
+
                 Console.Write("Введите имя отправной станции: ");
                 string startStation = Console.ReadLine();
                 Console.Write("Введите имя конечной станции: ");
@@ -118,11 +129,10 @@ namespace ConfiguratorOfPassengerTrains
                 {
                     Console.WriteLine("Вы ввели не число!");
                 }
-                
-                
+
                 var random = new Random();
                 
-                Directions?.Add(new Direction(nameOfDirection, travelTime, 0, random.Next(0, 99999)));
+                _directions?.Add(new Direction(nameOfDirection, travelTime, 0, random.Next(0, 99999)));
             }
 
             Console.Clear();
@@ -130,7 +140,7 @@ namespace ConfiguratorOfPassengerTrains
 
         private bool CheckIsDirectionEmpty()
         {
-            return Directions.Count == 0;
+            return _directions.Count == 0;
         }
         
         private DateTime SetTravelTime(int result, DateTime travelTime)
@@ -146,17 +156,13 @@ namespace ConfiguratorOfPassengerTrains
             return travelTime;
         }
 
-        public Direction GetDirection()
-        {
-            return Directions[0];
-        }
-
         private void WriteDirection()
         {
-            foreach (var direction in Directions)
+            foreach (var direction in _directions)
             {
                 Console.Write($"Название пути: {direction.NameOfDirection} " +
-                              $"\nВремя в пути: {direction.TravelTime.Hour:0} часа(-ов) {direction.TravelTime.Minute:00} минуты" +
+                              $"\nВремя в пути: {direction.TravelTime.Month} месяцев {direction.TravelTime.Day} дней " +
+                              $"{direction.TravelTime.Hour:0} часа(-ов) {direction.TravelTime.Minute:00} минуты" +
                               $"\nНомер поезда: №{direction.NumberOfTrain} " +
                               $"\nКол-во пассажиров: {direction.CountOfPassengers}");
             }
