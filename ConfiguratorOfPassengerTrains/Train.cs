@@ -18,6 +18,12 @@ namespace ConfiguratorOfPassengerTrains
         
         public bool CreateTrain()
         {
+            if (_directions.Count == 0)
+            {
+                Console.WriteLine("Вы не создали направление.");
+                return false;
+            }
+            
             var random = new Random();
 
             _wagons.Insert(0, new Wagon(0));
@@ -41,6 +47,13 @@ namespace ConfiguratorOfPassengerTrains
 
         public void SendOnTheTrainOnTheWay()
         {
+            if (_wagons.Count == 0)
+            {
+                Console.WriteLine("Вы не создали направление и не сформировали вагоны.");
+                return;
+            }
+
+            Console.WriteLine();
             Console.WriteLine($"Поезд в составе {_wagons.Count} вагонов отправился в путь. \nВы можете создать новый путь.");
             Thread.Sleep(2000);
             _wagons.Clear();

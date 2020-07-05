@@ -11,6 +11,12 @@ namespace ConfiguratorOfPassengerTrains
         }
         public void TicketSelling()
         {
+            if (_directions.Count == 0)
+            {
+                Console.WriteLine("Вы не создали направление.");
+                return;
+            }
+            
             var random = new Random();
 
             _directions[0].SetCountOfPassenger(random);
