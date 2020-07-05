@@ -4,8 +4,8 @@
     {
         public static void Main(string[] args)
         {
-            var menu = new Station();
-            menu.ShowMenu();
+            var station = new Station();
+            station.ShowMenu();
         }
     }
 }

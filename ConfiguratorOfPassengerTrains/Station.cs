@@ -16,8 +16,11 @@ namespace ConfiguratorOfPassengerTrains
 
             while (isWorks)
             {
-                if(isCreatedTrain)
-                    Console.WriteLine("Поезд сформирован.");
+                if (isCreatedTrain)
+                {
+                    Console.WriteLine($"Сформировано {train.GetCountOfOfficeWagons()} служебных вагона" +
+                                      $" и {train.GetCountOfWagonsWithPassenger()} вагонов с пассажирами");
+                }
                 else if(!CheckIsDirectionEmpty())
                    WriteDirection();
                 else

@@ -14,8 +14,9 @@ namespace ConfiguratorOfPassengerTrains
             var random = new Random();
 
             _directions[0].SetCountOfPassenger(random);
-            
-            Console.WriteLine("Билеты успешно проданы.");
+
+            Console.WriteLine();
+            Console.WriteLine($"Успешно продано {_directions[0].CountOfPassengers} билетов");
         }
 
     }
